@@ -12,14 +12,18 @@ const {
   editShow,
   deleteshow,
 } = require("../controller/adminController");
+
 const AdminRouter = express.Router();
 
 const isAdmin = (req, resp, next) => {
   if (!req.session.userdata || req.session.userdata.role !== "admin") {
+    console.log("is it true");
+
     return resp.redirect("/login");
   }
   next();
 };
+
 AdminRouter.use(isAdmin);
 
 AdminRouter.get("/admindash", admindash);

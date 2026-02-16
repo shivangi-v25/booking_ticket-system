@@ -21,8 +21,8 @@ app.use(
 );
 
 app.use("/", router);
-app.use("/", AdminRouter);
-app.use("/", brouter);
+app.use("/admin", AdminRouter);
+app.use("/movies", brouter);
 
 app.listen(4000, () => {
   console.log("running");

@@ -16,7 +16,7 @@ const movieAdd = async (req, resp) => {
   try {
     const { title, description, duration, genre, poster } = req.body;
     await movieModel.create({ title, description, duration, genre, poster });
-    resp.redirect("/admindash");
+    resp.redirect("/admin/admindash");
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +24,7 @@ const movieAdd = async (req, resp) => {
 const editMovie = async (req, resp) => {
   try {
     await movieModel.findByIdAndUpdate(req.params.id, req.body);
-    resp.redirect("/admindash");
+    resp.redirect("/admin/admindash");
   } catch (error) {
     console.log(error);
   }
@@ -42,7 +42,7 @@ const fetchMoviebyId = async (req, resp) => {
 const deleteMovie = async (req, resp) => {
   try {
     await movieModel.findByIdAndDelete(req.params.id);
-    resp.redirect("/admindash");
+    resp.redirect("/admin/admindash");
   } catch (error) {
     console.log(error);
   }
@@ -62,7 +62,7 @@ const AddShow = async (req, resp) => {
     const { movie, date, time, availableSeats, price } = req.body;
 
     await showModel.create({ movie, date, time, availableSeats, price });
-    resp.redirect("/admindash");
+    resp.redirect("/admin/admindash");
   } catch (error) {
     console.log(error);
   }
@@ -92,7 +92,7 @@ const editShow = async (req, resp) => {
     console.log(req.body);
 
     await showModel.findByIdAndUpdate(req.params.id, req.body);
-    resp.redirect("/allshow");
+    resp.redirect("/admin/allshow");
   } catch (error) {
     console.log(error);
   }
@@ -101,7 +101,7 @@ const editShow = async (req, resp) => {
 const deleteshow = async (req, resp) => {
   try {
     await showModel.findByIdAndDelete(req.params.id);
-    resp.redirect("/admindash");
+    resp.redirect("/admin/allShow");
   } catch (error) {
     console.log(error);
   }

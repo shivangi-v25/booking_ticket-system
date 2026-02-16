@@ -25,9 +25,9 @@ const login = async (req, resp) => {
           name: "admin",
           role: "admin",
         };
-        console.log(req.session.userdata);
+        console.log(req.session, "come to page");
 
-        return resp.redirect("/admindash");
+        return resp.redirect("/admin/admindash");
       } else {
         return resp.end("Invalid credentials");
       }

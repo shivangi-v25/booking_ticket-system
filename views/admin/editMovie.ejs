@@ -10,12 +10,53 @@
       rel="stylesheet"
     />
   </head>
-
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/admindash">booking</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/movieAdd">Movie</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/addShow">SHow</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/allShow">All SHow</a>
+            </li>
+          </ul>
+          <a
+            name=""
+            id=""
+            class="btn btn-primary btn-sm"
+            href="/admin/logout"
+            role="button"
+            >logout</a
+          >
+        </div>
+      </div>
+    </nav>
+  </header>
   <body>
     <div class="container mt-5">
       <h2 class="mb-4">Edit Movie</h2>
 
-      <form action="/editMovie/<%= movie.id %>?_method=patch" method="post">
+      <form
+        action="/admin/editMovie/<%= movie.id %>?_method=patch"
+        method="post"
+      >
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -35,10 +76,11 @@
             name="description"
             id="description"
             placeholder="Description"
-            value="<%= movie.description %>"
             style="height: 100px"
             required
-          ></textarea>
+          >
+<%= movie.description %></textarea
+          >
           <label for="description">Description</label>
         </div>
 

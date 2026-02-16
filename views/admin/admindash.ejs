@@ -24,7 +24,7 @@
     <header>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="/admindash">booking</a>
+          <a class="navbar-brand" href="/admin/admindash">booking</a>
           <button
             class="navbar-toggler d-lg-none"
             type="button"
@@ -40,13 +40,13 @@
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
       
               <li class="nav-item">
-                <a class="nav-link" href="/movieAdd">Movie</a>
+                <a class="nav-link" href="/admin/movieAdd">Movie</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/addShow">SHow</a>
+                <a class="nav-link" href="/admin/addShow">SHow</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/allShow">All SHow</a>
+                <a class="nav-link" href="/admin/allShow">All SHow</a>
               </li>
     
             </ul>
@@ -54,7 +54,7 @@
               name=""
               id=""
               class="btn btn-primary btn-sm"
-              href="/logout"
+              href="/admin/logout"
               role="button"
               >logout</a
              >
@@ -88,8 +88,8 @@
             role="button"
             >edit</a
           > -->
-          <a href="/editMovie/<%=mov.id %>"><button class="btn btn-primary btn-sm">edit</button></a>
-          <form action="/deleteMovie/<%=mov.id %>?_method=delete" method="post" style="display: inline;">
+          <a href="/admin/editMovie/<%=mov.id %>"><button class="btn btn-primary btn-sm">edit</button></a>
+          <form action="/admin/deleteMovie/<%=mov.id %>?_method=delete" method="post" style="display: inline;">
        <button type="submit" class="btn btn-primary btn-sm">delete</button>
          
           </form>
