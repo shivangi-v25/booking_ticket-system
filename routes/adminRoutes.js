@@ -45,6 +45,7 @@ AdminRouter.get("/editShow/:id", fetchshowbyId);
 AdminRouter.patch("/editShow/:id", editShow);
 
 AdminRouter.delete("/deleteShow/:id", deleteshow);
+
 AdminRouter.get("/logout", (req, resp) => {
   req.session.destroy((err) => {
     console.log("entered");

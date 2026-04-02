@@ -20,7 +20,7 @@
 
   </head>
 
-  <body>
+  <body style="background-color: #e7caac">
     <header>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
@@ -64,14 +64,19 @@
       </nav>
     </header>
     <main>
+      <div
+        class="container text-center p-3 shadow"
+      >
+        <h2>Admin Dashboard</h2>
+      </div>
       
 
-      <div class="container shadow mt-3 p-3">
-        <div class="row justify-content-center align-items-center g-2">
+      <div class="container-fluid shadow mt-3 p-3">
+        <div class="row justify-content-center align-items-center g-2 p-5">
      <% if (movies && movies.length > 0) { %>
   <% movies.forEach(mov => { %>
-    <div class="col-md-4">
-      <div class="card">
+    <div class="col-md-3 mt-2">
+      <div class="card" style="background-color: #faefe3;" >
         <img class="card-img-top" src="<%=mov.poster%>" alt="Title" height="250px" width="100px" >
         <div class="card-body">
           <h4 class="card-title"><%= mov.title %></h4>
@@ -90,7 +95,7 @@
           > -->
           <a href="/admin/editMovie/<%=mov.id %>"><button class="btn btn-primary btn-sm">edit</button></a>
           <form action="/admin/deleteMovie/<%=mov.id %>?_method=delete" method="post" style="display: inline;">
-       <button type="submit" class="btn btn-primary btn-sm">delete</button>
+       <button type="submit" class="btn btn-secondary btn-sm">delete</button>
          
           </form>
         </div>

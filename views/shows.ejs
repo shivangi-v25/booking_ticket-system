@@ -20,7 +20,7 @@
 
   </head>
 
-  <body>
+  <body style="background-color: #c1be7f">
     <header>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
@@ -71,7 +71,7 @@
                 Price: $<%= show.price %>
               </p>
               <div class="d-flex justify-content-between">
-                <form action="/bookShow/<%=show.id %>" method="POST">
+                <form action="/movies/bookShow/<%=show._id %>" >
                   <button type="submit" class="btn btn-sm btn-danger">Book</button>
                 </form>
               </div>

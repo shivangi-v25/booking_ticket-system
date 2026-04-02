@@ -25,7 +25,7 @@
     />
   </head>
 
-  <body>
+  <body style="background-color: #c1be7f">
     <header>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
@@ -44,7 +44,7 @@
           <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="/history">booking history</a>
+                <a class="nav-link" href="/movies/history">booking history</a>
               </li>
             </ul>
             <a
@@ -60,28 +60,28 @@
       </nav>
     </header>
     <main>
-      <div class="container shadow mt-3 p-3">
-        <form action="/history" method="post">
+      <div class="container col-4 shadow mt-3 p-3">
+        <form action="/movies/bookShow/<%=show.id%>" method="post">
           <div class="form-floating mb-3">
             <div class="card">
               <img
                 class="card-img-top"
                 src="<%=show.movie.poster%>"
                 alt="Title"
-                height="100px"
+                height="250px"
                 width="100px"
               />
               <div class="card-body">
-                <h4 class="card-title">
-                  Name:<%=show.movie.title%>|duration:<%=show.movie.duration|date:<%=show.date%>%>
-                </h4>
-                <p class="card-text">time:<%=show.time% ><span id="price">price:<%=show.price %></span> |<span id="Avalseats">availableSeats:<%=show.availableSeats%></span> </p>
+                <h6 class="card-title text-danger bold">
+                  <%=show.movie.title%>|duration:<%=show.movie.duration%>|date:<%=new Date(show.date).toLocaleDateString() %>
+                </h6>
+                <p class="card-text">time:<%=show.time%>&nbsp;&nbsp;<span id="price" data-price="<%=show.price %>">price:<%=show.price %></span> |<span id="Avalseats" data-avail="<%=show.availableSeats%>">availableSeats:<%=show.availableSeats%></span> </p>
                 <p>
               <div class="form-floating mb-3">
                 <input
-                    type="text"
+                    type="number"
                     class="form-control"
-                    name="person"
+                    name="Seats"
                     id="person"
                     placeholder=""
                 />
@@ -89,7 +89,7 @@
               </div>
               <div class="form-floating mb-3">
                 <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     name="price"
                     id="tprice"
@@ -106,14 +106,22 @@
         </form>
       </div>
       <script>
-       const price=document.getElementById("price").innerText
-       const person=document.getElementById("person").value
+       const price=Number( document.getElementById("price").dataset.price)
+       const availseats=Number( document.getElementById("Avalseats").dataset.avail)
+       const person=document.getElementById("person")
+       
        const tprice=document.getElementById("tprice")
-       const Avalseats=document.getElementById("Avalseats").innerText
+       person.addEventListener("input",function(){
+        let p=Number(this.value)
+            let total=price*p
+       if (p>availseats) {
+        alert("no seats available")
+        return tprice.value=""
+       }
+            tprice.value=total
 
-       const totalAmount=price*person
-        tprice.innerText=totalAmount
-        document.body.appendChild(tprice)
+       })
+       
 
 
       </script>

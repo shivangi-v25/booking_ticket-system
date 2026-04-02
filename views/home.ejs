@@ -20,7 +20,7 @@
 
   </head>
 
-  <body>
+  <body style="background-color: #c1be7f">
     <header>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
@@ -40,7 +40,7 @@
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
       
               <li class="nav-item">
-                <a class="nav-link" href="/history">booking history</a>
+                <a class="nav-link" href="/movies/booking">booking history</a>
               </li>
              
     
@@ -61,11 +61,11 @@
     <main>
       
 
-      <div class="container shadow mt-3 p-3">
+      <div class="container shadow mt-3 p-3 " style="background-color: aliceblue;">
         <div class="row justify-content-center align-items-center g-2">
      <% if (movies && movies.length > 0) { %>
   <% movies.forEach(mov => { %>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card">
         <img class="card-img-top" src="<%=mov.poster%>" alt="Title" height="250px" width="100px" >
         <div class="card-body">
@@ -76,7 +76,7 @@
           </p>
           <p>genre: <%= mov.genre %> | duration: <%= mov.duration %> mins </p>
 
-          <a href="/shows/<%=mov._id %>"><button class="btn btn-danger btn-sm">apply</button></a>
+          <a href="/movies/shows/<%=mov._id %>"><button class="btn btn-danger btn-sm">Book Now</button></a>
           <!-- <form action="/deleteMovie/<%=mov.id %>?_method=delete" method="post" style="display: inline;">
        <button type="submit" class="btn btn-primary btn-sm">delete</button> -->
          

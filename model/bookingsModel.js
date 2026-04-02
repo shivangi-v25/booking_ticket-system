@@ -4,12 +4,12 @@ const userModel = require("./userModel");
 const bookSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "userModel",
+    ref: "user",
     required: true,
   },
   show: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "movieModel",
+    ref: "show",
     required: true,
   },
   Seats: {
