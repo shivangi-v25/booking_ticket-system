@@ -16,90 +16,128 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-XXXXX+y+XXXXX/XXXX==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+ <link rel="stylesheet" href="/css/style.css">
   </head>
 
-  <body style="background-color: #e7caac">
-    <header>
-           <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="/admin/admindash">booking</a>
-          <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-      
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/movieAdd">Movie</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/addShow">SHow</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/allShow">All SHow</a>
-              </li>
-    
-            </ul>
-             <a
-              name=""
-              id=""
-              class="btn btn-primary btn-sm"
-              href="/admin/logout"
-              role="button"
-              >logout</a
-             >
-             
-          </div>
-        </div>
-      </nav>
-    </header>
-    <main>
-      
-<div class="container my-4">
-  <h2 class="text-center mb-4">All Shows</h2>
-  <div class="row g-3 justify-content-start">
+  <body style="background-color: #c9b9a9">
+<div id="wrapper">
+ <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <span class="text-primary">BOOKING</span>ADMIN
+            </div>
+            <nav class="mt-3">
+                <a href="/admin/admindash" class="nav-link-custom ">
+                    <i class="bi bi-grid-1x2-fill me-2"></i> Dashboard
+                </a>
+                <a href="/admin/movieAdd" class="nav-link-custom">
+                    <i class="bi bi-plus-square me-2"></i> Add Movie
+                </a>
+                <a href="/admin/addShow" class="nav-link-custom">
+                    <i class="bi bi-calendar-plus me-2"></i> Add Show
+                </a>
+                <a href="/admin/allShow" class="nav-link-custom active">
+                    <i class="bi bi-collection-play me-2"></i> All Shows
+                </a>
+            </nav>
+        </aside>
+
+        <div id="page-content-wrapper">
+            <main class="p-4">
+<div class="container-fluid py-5 px-4" style="background-color: #f8f9fa; min-height: 100vh;">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <button id="menu-btn" class="btn btn-primary d-md-none">
+  ☰
+</button>
+      <h2 class="fw-bold text-dark mb-1">Show Schedules</h2>
+      <p class="text-muted small">Manage screenings, seat availability, and pricing.</p>
+    </div>
+    <a href="/admin/addShow" class="btn btn-primary px-4 fw-bold shadow-sm">
+       + Add New Show
+    </a>
+  </div>
+
+  <div class="row g-4">
     <% if (shows && shows.length > 0) { %>
       <% shows.forEach(show => { %>
-        <div class="col-md-3">
-          <div class="card h-100">
-            <% if (show.movie && show.movie.poster) { %>
-              <img src="<%= show.movie.poster %>" class="card-img-top" alt="<%= show.movie.title %>" style="height:200px; object-fit:cover;">
-            <% } %>
-            <div class="card-body">
-              <h5 class="card-title"><%= show.movie ? show.movie.title : "Movie Deleted" %></h5>
-              <p class="card-text">
-                Date: <%= new Date(show.date).toLocaleDateString() %><br>
-                Time: <%= show.time %><br>
-                Seats Available: <%= show.availableSeats %><br>
-                Price: $<%= show.price %>
-              </p>
-              <div class="d-flex justify-content-between">
-                <a href="/admin/editShow/<%= show.id %>" class="btn btn-sm btn-primary">Edit</a>
-                <form action="/admin/deleteShow/<%= show.id %>?_method=delete" method="POST">
-                  <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden transition-hover">
+            
+            <div class="position-relative">
+              <% if (show.movie && show.movie.poster) { %>
+                <img src="<%= show.movie.poster %>" class="card-img-top" alt="Poster" style="height: 240px; object-fit: cover;">
+              <% } else { %>
+                <div class="bg-secondary d-flex align-items-center justify-content-center text-white" style="height: 240px;">
+                  <small>No Image</small>
+                </div>
+              <% } %>
+              <div class="position-absolute bottom-0 end-0 m-2">
+                <span class="badge bg-dark px-3 py-2 rounded-pill shadow">
+                  $<%= show.price %>
+                </span>
               </div>
             </div>
+
+            <div class="card-body p-3">
+              <h6 class="text-uppercase text-primary fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 1px;">
+                <%= show.movie ? show.movie.genre : "General" %>
+              </h6>
+              <h5 class="card-title fw-bold text-dark text-truncate">
+                <%= show.movie ? show.movie.title : "Unknown Movie" %>
+              </h5>
+              
+              <div class="mt-3 pt-3 border-top">
+                <div class="d-flex justify-content-between mb-1">
+                  <span class="text-muted small">Date:</span>
+                  <span class="small fw-medium"><%= new Date(show.date).toDateString() %></span>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                  <span class="text-muted small">Time:</span>
+                  <span class="small fw-medium"><%= show.time %></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted small">Seats:</span>
+                  <span class="badge <%= show.availableSeats > 10 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' %> rounded-1">
+                    <%= show.availableSeats %> Left
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer bg-white border-0 p-3 pt-0">
+              <div class="row g-2">
+                <div class="col-6">
+                  <a href="/admin/editShow/<%= show.id %>" class="btn btn-outline-secondary btn-sm w-100">Edit</a>
+                </div>
+                <div class="col-6">
+                  <form action="/admin/deleteShow/<%= show.id %>?_method=delete" method="POST">
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Delete this show?')">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       <% }) %>
     <% } else { %>
-      <p class="text-center">No shows available</p>
+      <div class="col-12 text-center mt-5">
+        <h5 class="text-muted">No active shows found.</h5>
+      </div>
     <% } %>
   </div>
 </div>
 
-    </main>
+
+            </main>
+        </div>
+
+</div>
+
+
+
     <footer>
       <!-- place footer here -->
     </footer>
@@ -111,9 +149,22 @@
     ></script>
 
     <script
+
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
-    ></script>
+    > </script>
+    <script>
+  document.getElementById("menu-btn").addEventListener("click", function () {
+    document.getElementById("sidebar-wrapper").classList.toggle("active");
+  });
+     if (document.getElementById("sidebar-wrapper").classList.contains("active")) {
+             document.getElementById("sidebar-wrapper").style.marginLeft = "260px";
+        } else {
+            document.getElementById("sidebar-wrapper").style.marginLeft = "0";
+        }
+ 
+  </script>
+  
   </body>
 </html>

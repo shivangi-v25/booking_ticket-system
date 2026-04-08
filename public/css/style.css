@@ -1,0 +1,96 @@
+body {
+  background-color: #f4f7f6;
+  overflow-x: hidden;
+}
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styling */
+#sidebar-wrapper {
+  height: 100vh;
+  position: fixed;
+  width: 260px;
+  background: #212529;
+  color: #fff;
+  transition: all 0.3s;
+}
+.sidebar-brand {
+  padding: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #343a40;
+}
+.nav-link-custom {
+  padding: 1rem 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+.nav-link-custom:hover {
+  background: #343a40;
+  color: #0d6efd;
+  padding-left: 1.8rem;
+}
+.nav-link-custom.active {
+  background: #0d6efd;
+  color: white;
+}
+
+/* Main Content */
+#page-content-wrapper {
+  margin-left: 260px;
+  flex: 1;
+}
+.top-navbar {
+  background: #fff;
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Movie Card Styling */
+.movie-card {
+  border: none;
+  border-radius: 12px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+  background: #fff;
+}
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card-img-top {
+  object-fit: cover;
+  height: 320px;
+}
+.genre-badge {
+  font-size: 0.75rem;
+  background: #e7f1ff;
+  color: #0d6efd;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+#sidebar-wrapper.active {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  #sidebar-wrapper {
+    transform: translateX(-100%);
+  }
+  #page-content-wrapper {
+    margin-left: 0;
+    flex: 1;
+  }
+  #sidebar-wrapper.active {
+    transform: translateX(0);
+    z-index: 1000;
+  }
+}

@@ -1,5 +1,6 @@
 const express = require("express");
 const connectDb = require("./db");
+const path = require("path");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const router = require("./routes/userRoutes");
@@ -8,6 +9,7 @@ const brouter = require("./routes/bookingroutes");
 const app = express();
 
 connectDb();
+app.use(express.static(path.join(path.join(__dirname, "public"))));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));

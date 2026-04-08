@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const showModel = require("../model/showModel");
 const bookingsModel = require("../model/bookingsModel");
+const movieModel = require("../model/movieModel");
 
 const getallShows = async (req, resp) => {
   try {
@@ -31,6 +32,10 @@ const bookShow = async (req, resp) => {
     console.log(show);
 
     await bookingsModel.create({ user, show, Seats, price });
+    await showModel.updateOne(
+      { _id: show },
+      { $inc: { availableSeats: -Number(Seats) } },
+    );
     resp.redirect("/movies/booking");
   } catch (error) {
     console.log(error);
@@ -39,7 +44,14 @@ const bookShow = async (req, resp) => {
 
 const removeShow = async (req, resp) => {
   try {
+    const cancelBooking = await bookingsModel.findById(req.params.id);
+    const bookedSeats = cancelBooking.Seats;
+    const showId = cancelBooking.show;
     await bookingsModel.findByIdAndDelete(req.params.id);
+    await showModel.updateOne(
+      { _id: showId },
+      { $inc: { availableSeats: Number(bookedSeats) } },
+    );
     resp.redirect("/movies/booking");
   } catch (error) {
     console.log(error);
@@ -59,10 +71,17 @@ const getbooking = async (req, resp) => {
 const showBooked = async (req, resp) => {
   try {
     const id = req.session.userdata.id;
-    console.log(id);
-    const book = await bookingsModel.find({ user: id }).populate("show");
+    console.log(id, "booking history started");
+    const book = await bookingsModel.find({ user: id }).populate({
+      path: "show",
+      populate: {
+        path: "movie",
+      },
+    });
 
-    console.log("found it ", book);
+    // const movie = await movieModel.findById(movieId);
+
+    // console.log("found it ", { book, movie });
 
     resp.render("booking", { book });
   } catch (error) {
